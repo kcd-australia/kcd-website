@@ -47,3 +47,20 @@ jobs:
 
       - name: Docker Push
         run: docker push bradmccoydev/kcd-website:${{ github.sha }}
+      
+      - name: update tag for oc-web image on deployment
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          CLIENT_ENVIRONMENT: production
+        run: |-
+          export $GITHUB_SHA
+          find "chart" -name "*.tmpl" -exec bash -c 'envsubst < $1 > chart/${{ env.CLIENT_ENVIRONMENT }}-values.yaml' _ {} \;
+          ls chart/
+          cat chart/${{ env.CLIENT_ENVIRONMENT }}-values.yaml
+          git status   
+          git config --global user.email "github_actions@kcd-australia.io"
+          git config --global user.name "github_actions"
+          git add chart/${{ env.CLIENT_ENVIRONMENT }}-values.yaml
+          echo $IMAGE_TAG
+          git commit -m "update image tag with $GITHUB_SHA"
+          git push

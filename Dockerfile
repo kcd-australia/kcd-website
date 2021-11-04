@@ -1,11 +1,9 @@
 # stage1 - build react app first 
 FROM node:16-alpine3.12 as build
 WORKDIR /app
-
 ENV PATH /app/node_modules/.bin:$PATH
-
 COPY . /app
-RUN yarn build
+RUN yarn && yarn build
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:1.21.3 as final
