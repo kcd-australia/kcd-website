@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  kcd-ui:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2021-11-04T08:32:20.065736311Z"
+    description: A Helm chart for Kubernetes
+    digest: 33c38e427dccf8cd9f4e8ef1f6a4fa631334a9f253a4dbc847603f8d518bb41d
+    name: kcd-ui
+    type: application
+    urls:
+    - https://github.com/kcd-australia/kcd-website/releases/download/kcd-ui-0.1.0/kcd-ui-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-11-04T08:32:20.065743511Z"
