@@ -13,8 +13,12 @@ jobs:
       GITHUB_SHA: ${{ github.sha }}
       CLIENT_ENVIRONMENT: production
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: docker login
         env:
@@ -42,22 +46,22 @@ jobs:
       - name: update tag for oc-web image on deployment
         run: |-
           export GITHUB_SHA=${{ github.sha }}
-          find "chart" -name "*.tmpl" -exec bash -c 'envsubst < $1 > chart/${{ env.CLIENT_ENVIRONMENT }}-values.yaml' _ {} \;
+          find "chart" -name "*.tmpl" -exec bash -c 'envsubst < $1 > chart/values.yaml' _ {} \;
           ls chart/
-          cat chart/${{ env.CLIENT_ENVIRONMENT }}-values.yaml
+          cat chart/values.yaml
           git status   
-          git config --global user.email "github_actions@kcd-australia.io"
-          git config --global user.name "github_actions"
-          git add chart/${{ env.CLIENT_ENVIRONMENT }}-values.yaml
-          echo $IMAGE_TAG
+          git add chart/values.yaml
           git commit -m "update image tag with $GITHUB_SHA"
           git push
       
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+      - name: Install Helm
+        uses: azure/setup-helm@v1
         with:
-          distribution: goreleaser
-          version: latest
-          args: release --rm-dist
+          version: v3.4.0
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.1
+        with:
+          charts_dir: chart
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
