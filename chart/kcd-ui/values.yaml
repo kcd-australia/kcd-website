@@ -4,7 +4,7 @@ image:
   repository: bradmccoydev/kcd-website
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "33c8a77d99eaf90c48fcace58e62f9988ff05e8d"
+  tag: "16a4f56d4a560ad3623697980c5ed300ef0a722f"
 
 imagePullSecrets: []
 nameOverride: "kcd-ui"
