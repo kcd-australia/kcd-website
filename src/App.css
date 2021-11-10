@@ -1,5 +1,7 @@
 .App {
+  height: 100vh;
   text-align: center;
+  background-color: #ffffff;
 }
 
 .App-logo {
@@ -14,7 +16,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,11 +29,60 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10vw;
+  height: 55px;
+  align-items: center;
+  /* background-color: rgb(50, 50, 50); */
+}
+.nav-link {
+  font-size: 20px;
+  padding: 13px;
+  text-decoration: none;
+  color: #326ce5;
+  font-weight: 600;
+  transition: all 0.4s ease-out;
+  border-bottom: 4px rgb(255, 255, 255) solid;
+}
+nav .active {
+  border-bottom: 4px #326ce5 solid;
+}
+
+.nav-link:hover{
+  border-bottom: 4px #326ce5 solid;
+}
+
+.body-container {
+  overflow: auto;
+  height: calc(100vh - 55px - 40px);
+  background-color: rgb(255, 255, 255);
+  padding: 0 10vw;
+}
+.body-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 40px;
+  padding-right: 30px;
+  color: #326ce5;
+  font-weight: 600;
+}
+.footer-logo {
+  height: 30px;
+  margin-left: 10px;
+}
+
+.animate-in {
+  animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s both;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
   }
 }
+
