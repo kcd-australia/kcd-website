@@ -1,0 +1,15 @@
+.contact-subcontainer {
+  display: inline-block;
+  margin: 20px 50px 20px 0;
+  transition: all linear 0.2s;
+  padding: 5px 0;
+}
+
+.contact-subcontainer:hover {
+  border-bottom: 3px rgb(0, 255, 255) solid;
+}
+
+.contact-logo {
+  height: 40px;
+  margin-right: 10px;
+}
