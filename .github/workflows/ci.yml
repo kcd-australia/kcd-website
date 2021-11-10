@@ -55,7 +55,7 @@ jobs:
           cat kcd-ui/values.yaml
           git status   
           git add kcd-ui/values.yaml
-          git commit -m "update image tag with $GITHUB_SHA"
+          git commit -m "update image tag with $GITHUB_SHA" -s
           git push
       
       - name: Install Helm
